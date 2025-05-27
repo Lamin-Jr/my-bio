@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "mybio",
     "public": "public",
     "ignore": [
       "firebase.json",

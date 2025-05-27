@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, Sun, Moon, Computer, User, LogOut } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useTheme } from '../../contexts/ThemeContext';
+// import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '../ui/Button';
+import {useAuth} from "@hooks/useAuth.ts";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

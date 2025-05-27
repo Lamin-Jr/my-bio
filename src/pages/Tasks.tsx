@@ -29,6 +29,7 @@ export const Tasks: React.FC = () => {
       try {
         const fetchedTasks = await getTasks(currentUser.uid);
         setTasks(fetchedTasks);
+        console.log('fetchedTasks', fetchedTasks);
         setError(null);
       } catch (err) {
         console.error('Error fetching tasks:', err);

@@ -16,7 +16,8 @@
       "@utils/*": ["src/utils/*"],
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
-      "@config/*": ["src/config/*"]
+      "@config/*": ["src/config/*"],
+      "@store/*": ["src/store/*"]
     },
 
     /* Bundler mode */
