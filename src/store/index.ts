@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import profileSlice from "@config/store/userProfile/profileSlice.ts";
+import userProfileSlice from "@/store/userProfile/profileSlice.ts";
+import authSlice from "@/store/auth/authSlice.ts";
 
 export const store = configureStore({
-reducer: {profile: profileSlice}
+reducer: {auth: authSlice,userProfile: userProfileSlice}
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
 import {Provider} from "react-redux";
-import {store} from "@config/store";
+import {store} from "src/store";
 
 //service worker for PWA
 if ('serviceWorker' in navigator) {

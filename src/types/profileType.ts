@@ -1,12 +1,12 @@
-export type ProfileType = {
-    user: string;
+export type UserProfileType = {
+    user?: string;
     name: string;
-    email: string;
+    email?: string;
     avatar: string;
     bio: string;
-    experiences: [experienceType];
-    education: [educationType];
-    skills: [skillType];
+    experiences: experienceType[];
+    education: educationType[];
+    skills: skillType[];
 }
 
 type experienceType = {
@@ -26,7 +26,13 @@ type educationType = {
 
  type skillType = {
      category: string,
-     items: [string]
+     items: string[]
  }
+
+export interface ProfileStateType {
+    profile: UserProfileType | null;
+    loading: boolean;
+    error: string | null;
+}
 
  export type {experienceType, educationType, skillType}

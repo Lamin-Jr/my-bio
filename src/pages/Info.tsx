@@ -3,17 +3,14 @@ import { motion } from 'framer-motion';
 import { Layout } from '../components/layout/Layout';
 import { Card, CardContent } from '../components/ui/Card';
 import { Calendar, Github as GitHub, Mail, MapPin, Briefcase, Award, BookOpen, Code } from 'lucide-react';
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@config/store";
-import {fetchUserProfile} from "@config/store/userProfile/profileSlice.ts";
-// import firebase from "firebase/compat";
-import firebase from "firebase/compat";
-import DocumentData = firebase.firestore.DocumentData;
+import {RootState} from "src/store";
+import {useAppSelector} from "@hooks/appHooks.ts";
+
+
 
 export const Info: React.FC = () => {
-  const userProfile = useSelector((state: RootState) => state.profile);
-  const dispatch = useDispatch();
-  // Skills list
+  const userProfile = useAppSelector((state: RootState) => state.profile);
+
   const skills = [
     { category: 'Frontend', items: ['React', 'Vue.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'] },
     { category: 'Backend', items: ['Node.js', 'Express', 'Firebase', 'MongoDB', 'PostgreSQL', 'REST APIs'] },
@@ -76,12 +73,8 @@ export const Info: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(userProfile.data, "User Profile Data");
-    dispatch(fetchUserProfile as DocumentData);
-    // if (userProfile.data) {
-    //   document.title = `${userProfile.data.name} | Portfolio`;
-    // }
-  }, [dispatch, userProfile.data]);
+    console.log(userProfile, "User Profile");
+  }, []);
   return (
     <Layout title="About Me - Portfolio" description="Learn more about my background, skills, and experience as a software developer">
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
@@ -117,7 +110,7 @@ export const Info: React.FC = () => {
                       <div className="p-6 flex flex-col items-center text-center">
                         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white mb-4">
                           <img 
-                            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                            src="https://media.licdn.com/dms/image/v2/D4D03AQHKBaJz7PP1sQ/profile-displayphoto-shrink_200_200/B4DZQ7eICdGgAY-/0/1736164542841?e=1753920000&v=beta&t=UaeC0_1sZuJ0paP-w6V5EUvso2tJBvmKJ0_N0KRD-ow"
                             alt="Profile" 
                             className="w-full h-full object-cover"
                           />

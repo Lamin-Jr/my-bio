@@ -1,39 +1,37 @@
-import React from 'react';
+import { useAppSelector } from '@/hooks/appHooks.ts';
+import { LoadingSpinner } from '@components/ui/LoadingSpinner';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { LoadingSpinner } from '../ui/LoadingSpinner';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
   requireAdmin?: boolean;
 }
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
-  children, 
-  requireAdmin = false 
-}) => {
-  const { currentUser, loading } = useAuth();
+export const ProtectedRoute = ({children, requireAdmin = false }: ProtectedRouteProps) => {
   const location = useLocation();
+  const { isAuthenticated, isAdmin, initialized } = useAppSelector(
+      (state) => ({
+        isAuthenticated: state.auth.currentUser !== null,
+        isAdmin: state.auth.currentUser?.isAdmin || false,
+        initialized: state.auth.initialized
+      })
+  );
 
-  // Show loading spinner while checking auth state
-  if (loading) {
+  if (!initialized) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Checking authentication..." />
-      </div>
+        <div className="h-screen flex items-center justify-center">
+          <LoadingSpinner size="lg" text="Checking authentication..." />
+        </div>
     );
   }
 
-  // If not logged in, redirect to login
-  if (!currentUser) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // If admin is required but user is not admin, redirect to home
-  if (requireAdmin && !currentUser.isAdmin) {
+  if (requireAdmin && !isAdmin) {
     return <Navigate to="/" replace />;
   }
 
-  // User is authenticated (and is admin if required)
   return <>{children}</>;
 };
