@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
                     <Link
                       to={link.href}
                       className="text-sm text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition-colors"
-                    >
+                    > 
                       {link.label}
                     </Link>
                   </li>

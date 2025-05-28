@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {motion} from 'framer-motion';
-import {LogIn, AlertCircle} from 'lucide-react';
+import {UserPlus, AlertCircle} from 'lucide-react';
 import {useAuth} from '@/hooks/useAuth';
 import {Layout} from '@/components/layout/Layout';
 import {Button} from '@/components/ui/Button';
@@ -11,12 +11,13 @@ interface LocationState {
     from?: { pathname: string };
 }
 
-export const Login: React.FC = () => {
+export const SignUp: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
 
-    const {signIn, loading, isAuthenticated, error: authError} = useAuth();
+    const {signUp, loading, isAuthenticated, error: authError} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -29,11 +30,6 @@ export const Login: React.FC = () => {
     }, [isAuthenticated, navigate, from]);
 
     useEffect(() => {
-        // Clear error when component unmounts or when authError changes
-        return () => setError(null);
-    }, []);
-
-    useEffect(() => {
         if (authError) {
             setError(authError);
         }
@@ -43,16 +39,21 @@ export const Login: React.FC = () => {
         e.preventDefault();
         setError(null);
 
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+
         try {
-            await signIn({email, password});
+            await signUp({email, password});
         } catch (err) {
-            console.error('Login error:', err);
-            setError('Failed to sign in. Please try again.');
+            console.error('Signup error:', err);
+            setError('Failed to create account. Please try again.');
         }
     };
 
     return (
-        <Layout title="Login - Portfolio" description="Log in to your portfolio account">
+        <Layout title="Sign Up - Portfolio" description="Create a new account">
             <div
                 className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
                 <motion.div
@@ -64,10 +65,10 @@ export const Login: React.FC = () => {
                     <Card>
                         <CardHeader>
                             <CardTitle className="text-2xl font-bold text-center">
-                                Log in to your account
+                                Create a new account
                             </CardTitle>
                             <CardDescription className="text-center">
-                                Enter your credentials to access the admin dashboard
+                                Get started with your portfolio management
                             </CardDescription>
                         </CardHeader>
 
@@ -112,7 +113,7 @@ export const Login: React.FC = () => {
                                         id="password"
                                         name="password"
                                         type="password"
-                                        autoComplete="current-password"
+                                        autoComplete="new-password"
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -121,26 +122,22 @@ export const Login: React.FC = () => {
                                     />
                                 </div>
 
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center">
-                                        <input
-                                            id="remember-me"
-                                            name="remember-me"
-                                            type="checkbox"
-                                            className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                                        />
-                                        <label htmlFor="remember-me"
-                                               className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                                            Remember me
-                                        </label>
-                                    </div>
-
-                                    <div className="text-sm">
-                                        <a href="#"
-                                           className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
-                                            Forgot your password?
-                                        </a>
-                                    </div>
+                                <div>
+                                    <label htmlFor="confirmPassword"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        Confirm Password
+                                    </label>
+                                    <input
+                                        id="confirmPassword"
+                                        name="confirmPassword"
+                                        type="password"
+                                        autoComplete="new-password"
+                                        required
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                                        placeholder="••••••••"
+                                    />
                                 </div>
 
                                 <Button
@@ -148,20 +145,18 @@ export const Login: React.FC = () => {
                                     fullWidth
                                     isLoading={loading}
                                     disabled={loading}
-                                    leftIcon={!loading ? <LogIn className="h-4 w-4"/> : undefined}
+                                    leftIcon={!loading ? <UserPlus className="h-4 w-4"/> : undefined}
                                 >
-                                    Sign In
+                                    Create Account
                                 </Button>
                             </form>
 
                             <div className="mt-6 text-center">
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    Don't have an account?{' '}
-                                    <a
-                                        href="/src/pages/SignUp"
-                                        className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-                                    >
-                                        Sign up now
+                                    Already have an account?{' '}
+                                    <a href="/login"
+                                       className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                                        Log in
                                     </a>
                                 </p>
                             </div>

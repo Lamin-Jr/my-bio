@@ -7,8 +7,8 @@ import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { BlogCard } from '../components/blog/BlogCard';
 import { getRecentPosts } from '../services/blogService';
-import { BlogPost } from '../types';
-import { useAuth } from '../contexts/AuthContext';
+import { BlogPost } from '@/types';
+import {useAuth} from "@hooks/useAuth.ts";
 
 export const Home: React.FC = () => {
   const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);

@@ -1,39 +1,45 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks/appHooks.ts';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { LoadingSpinner } from '../ui/LoadingSpinner';
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import { initializeAuth } from '@/store/auth/authSlice';
 
 interface ProtectedRouteProps {
-  children: React.ReactNode;
-  requireAdmin?: boolean;
+    children: React.ReactNode;
+    requireAdmin?: boolean;
 }
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
-  children, 
-  requireAdmin = false 
-}) => {
-  const { currentUser, loading } = useAuth();
-  const location = useLocation();
+export const ProtectedRoute = ({
+                                   children,
+                                   requireAdmin = false
+                               }: ProtectedRouteProps) => {
+    const dispatch = useAppDispatch();
+    const location = useLocation();
+    const { currentUser, initialized, loading } = useAppSelector((state) => state.auth);
+    const isAdmin = currentUser?.isAdmin || false;
 
-  // Show loading spinner while checking auth state
-  if (loading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Checking authentication..." />
-      </div>
-    );
-  }
+    // Initialize auth state if not already initialized
+    useEffect(() => {
+        if (!initialized && !loading) {
+            dispatch(initializeAuth());
+        }
+    }, [dispatch, initialized, loading]);
 
-  // If not logged in, redirect to login
-  if (!currentUser) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+    if (!initialized || loading) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <LoadingSpinner size="lg" text="Checking authentication..." />
+            </div>
+        );
+    }
 
-  // If admin is required but user is not admin, redirect to home
-  if (requireAdmin && !currentUser.isAdmin) {
-    return <Navigate to="/" replace />;
-  }
+    if (!currentUser) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
 
-  // User is authenticated (and is admin if required)
-  return <>{children}</>;
+    if (requireAdmin && !isAdmin) {
+        return <Navigate to="/" replace />;
+    }
+
+    return <>{children}</>;
 };
