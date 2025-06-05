@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Calendar, Tag } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
-import { BlogPost } from '../../types';
-import { Card } from '../ui/Card';
+import { BlogPost } from '@/types';
+import { Card } from '@/components/ui/Card';
 
 interface BlogCardProps {
   post: BlogPost;
@@ -12,7 +12,6 @@ interface BlogCardProps {
 }
 
 export const BlogCard: React.FC<BlogCardProps> = ({ post, index = 0 }) => {
-  // Animation variants
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {

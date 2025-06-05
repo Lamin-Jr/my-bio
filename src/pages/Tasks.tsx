@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Filter, CheckCircle, Circle } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
 import { Layout } from '../components/layout/Layout';
 import { TaskForm } from '../components/task/TaskForm';
 import { TaskList } from '../components/task/TaskList';
@@ -11,6 +10,7 @@ import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { getTasks, createTask, updateTask, toggleTaskComplete, deleteTask } from '../services/taskService';
 import { Task, TaskFormData } from '../types';
+import {useAuth} from "@hooks/useAuth.ts";
 
 export const Tasks: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);

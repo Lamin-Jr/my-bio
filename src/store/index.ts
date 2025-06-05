@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userProfileSlice from "@/store/userProfile/profileSlice.ts";
-import authSlice from "@/store/auth/authSlice.ts";
+import userProfileReducer from "@/store/userProfile/profileSlice.ts";
+import authReducer from "@/store/auth/authSlice.ts";
+import themeReducer from "@/store/theme/themeSlice.ts";
 
 export const store = configureStore({
-reducer: {auth: authSlice,userProfile: userProfileSlice}
+reducer: {auth: authReducer,userProfile: userProfileReducer, theme: themeReducer,}
 });
 
 export type RootState = ReturnType<typeof store.getState>;
