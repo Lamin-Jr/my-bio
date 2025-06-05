@@ -15,7 +15,7 @@ export const Layout: React.FC<LayoutProps> = ({
   title = 'Portfolio App', 
   description = 'A personal portfolio application with task management and blogging capabilities'
 }) => {
-  // Page transition variants
+
   const pageVariants = {
     initial: {
       opacity: 0,
@@ -53,8 +53,8 @@ export const Layout: React.FC<LayoutProps> = ({
         >
           {children}
         </motion.main>
-        
         <Footer />
+
       </div>
     </>
   );

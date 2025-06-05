@@ -18,4 +18,10 @@ export type SignInCredentials = {
     password: string;
 };
 
+export type SignUpCredentials = {
+    email: string;
+    password: string;
+};
+
 // export type {User, AuthState}
+

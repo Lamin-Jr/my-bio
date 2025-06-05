@@ -9,7 +9,7 @@ import {useAppSelector} from "@hooks/appHooks.ts";
 
 
 export const Info: React.FC = () => {
-  const userProfile = useAppSelector((state: RootState) => state.profile);
+  const userProfile = useAppSelector((state: RootState) => state.auth);
 
   const skills = [
     { category: 'Frontend', items: ['React', 'Vue.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'] },

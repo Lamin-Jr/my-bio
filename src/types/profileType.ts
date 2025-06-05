@@ -4,29 +4,41 @@ export type UserProfileType = {
     email?: string;
     avatar: string;
     bio: string;
-    experiences: experienceType[];
-    education: educationType[];
-    skills: skillType[];
+    experiences: ExperienceType[];
+    education: EducationType[];
+    skills: SkillType[];
 }
 
-type experienceType = {
+type ExperienceType = {
+    id: string
     company: string;
+    role: string;
     position: string;
     startDate: string;
     endDate: string;
     description: string;
 }
 
-type educationType = {
+type EducationType = {
+    id: string
     institution: string,
     degree: string,
     period: string,
     description: string,
+    fieldOfStudy: string,
+    startYear?: number,
+    endYear?: number,
 }
 
- type skillType = {
-     category: string,
-     items: string[]
+ // type SkillType = {
+ //     category: string,
+ //     items: string[]
+ // }
+
+ type SkillType = {
+     name: string,
+     level: 'intermediate' | 'advanced' | 'expert',
+     id: string
  }
 
 export interface ProfileStateType {
@@ -35,4 +47,4 @@ export interface ProfileStateType {
     error: string | null;
 }
 
- export type {experienceType, educationType, skillType}
+ export type {ExperienceType, EducationType, SkillType}
