@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Lightbulb, PenTool, Smartphone, ExternalLink } from 'lucide-react';
-import { Layout } from '../components/layout/Layout';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { BlogCard } from '../components/blog/BlogCard';
@@ -77,9 +76,7 @@ export const Home: React.FC = () => {
   ];
 
   return (
-    <Layout
-      title="Portfolio - Home"
-      description="Welcome to my personal portfolio, showcasing my skills, services, and latest blog posts."
+    <
     >
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-900 to-primary-600 text-white">
@@ -282,6 +279,6 @@ export const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 };

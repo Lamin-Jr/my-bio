@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  useEffect(() => {
+    console.log("FOOTER Rendered" + (+1));
+  });
   
   const socialLinks = [
     { icon: <Github className="h-5 w-5" />, href: 'https://github.com', label: 'GitHub' },

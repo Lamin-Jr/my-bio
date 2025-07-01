@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Filter, CheckCircle, Circle } from 'lucide-react';
-import { Layout } from '../components/layout/Layout';
 import { TaskForm } from '../components/task/TaskForm';
 import { TaskList } from '../components/task/TaskList';
 import { ProtectedRoute } from '../components/auth/ProtectedRoute';
@@ -9,7 +8,7 @@ import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { getTasks, createTask, updateTask, toggleTaskComplete, deleteTask } from '../services/taskService';
-import { Task, TaskFormData } from '../types';
+import { Task, TaskFormData } from '@/types';
 import {useAuth} from "@hooks/useAuth.ts";
 
 export const Tasks: React.FC = () => {
@@ -118,7 +117,7 @@ export const Tasks: React.FC = () => {
   
   return (
     <ProtectedRoute>
-      <Layout title="Task Management - Portfolio" description="Manage and organize your tasks">
+      <>
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
           <div className="container mx-auto px-4">
             <motion.div
@@ -257,7 +256,7 @@ export const Tasks: React.FC = () => {
             </motion.div>
           </div>
         </div>
-      </Layout>
+      </>
     </ProtectedRoute>
   );
 };

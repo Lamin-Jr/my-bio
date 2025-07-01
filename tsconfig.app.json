@@ -17,7 +17,8 @@
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@config/*": ["src/config/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@form/*": ["src/utils/form/*"],
     },
 
     /* Bundler mode */
@@ -26,7 +27,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "jsx": "react-jsx",
 
     /* Linting */
