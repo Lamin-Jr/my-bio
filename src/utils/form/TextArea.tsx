@@ -1,7 +1,7 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
+import  { forwardRef, TextareaHTMLAttributes } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 
-const inputVariants = cva(
+const textareaVariants = cva(
     'w-full transition-colors duration-200 focus:outline-none focus:ring-2',
     {
         variants: {
@@ -26,24 +26,25 @@ const inputVariants = cva(
     }
 );
 
-interface InputProps
-    extends InputHTMLAttributes<HTMLInputElement>,
-        VariantProps<typeof inputVariants> {
+export interface TextareaProps
+    extends TextareaHTMLAttributes<HTMLTextAreaElement>,
+        VariantProps<typeof textareaVariants> {
     error?: boolean;
+    helperText?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ({ className, variant, size, error, ...props }, ref) => {
         return (
-            <input
+            <textarea
                 ref={ref}
-                className={`${inputVariants({ variant, size, error })} ${className || ''}`}
+                className={`${textareaVariants({ variant, size, error })} ${className || ''}`}
                 {...props}
             />
         );
     }
 );
 
-Input.displayName = 'Input';
+Textarea.displayName = 'Textarea';
 
-export { Input };
+export { Textarea };

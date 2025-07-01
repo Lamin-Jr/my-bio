@@ -3,7 +3,6 @@ import {useNavigate, useLocation} from 'react-router-dom';
 import {motion} from 'framer-motion';
 import {UserPlus, AlertCircle} from 'lucide-react';
 import {useAuth} from '@/hooks/useAuth';
-import {Layout} from '@/components/layout/Layout';
 import {Button} from '@/components/ui/Button';
 import {Card, CardContent, CardHeader, CardTitle, CardDescription} from '@/components/ui/Card';
 
@@ -53,7 +52,7 @@ export const SignUp: React.FC = () => {
     };
 
     return (
-        <Layout title="Sign Up - Portfolio" description="Create a new account">
+        <>
             <div
                 className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
                 <motion.div
@@ -164,6 +163,6 @@ export const SignUp: React.FC = () => {
                     </Card>
                 </motion.div>
             </div>
-        </Layout>
+        </>
     );
 };

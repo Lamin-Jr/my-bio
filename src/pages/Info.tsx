@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import { motion } from 'framer-motion';
-import { Layout } from '../components/layout/Layout';
 import { Card, CardContent } from '../components/ui/Card';
 import { Calendar, Github as GitHub, Mail, MapPin, Briefcase, Award, BookOpen, Code } from 'lucide-react';
 import {RootState} from "src/store";
@@ -76,7 +75,7 @@ export const Info: React.FC = () => {
     console.log(userProfile, "User Profile");
   }, []);
   return (
-    <Layout title="About Me - Portfolio" description="Learn more about my background, skills, and experience as a software developer">
+    <>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
         <div className="container mx-auto px-4">
           <motion.div
@@ -372,6 +371,6 @@ export const Info: React.FC = () => {
           </motion.div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
