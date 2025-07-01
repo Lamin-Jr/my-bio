@@ -1,5 +1,4 @@
-import {createBrowserRouter, Outlet} from "react-router-dom";
-import {Layout} from "@/components/layout/Layout.tsx";
+import {createBrowserRouter} from "react-router-dom";
 import {Home} from "@/pages/Home.tsx";
 import {Info} from "@/pages/Info.tsx";
 import {Services} from "@/pages/Services.tsx";
@@ -9,12 +8,7 @@ import {Tasks} from "@pages/Tasks.tsx";
 import {Login} from "@pages/Login.tsx";
 import {SignUp} from "@pages/SignUp.tsx";
 import {ProfilePage} from "@pages/ProfilePage.tsx";
-
-const LayoutWrapper = () => (
-    <Layout>
-        <Outlet />
-    </Layout>
-);
+import {LayoutWrapper} from "@components/layout/LayoutWrapper.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -32,23 +26,24 @@ export const router = createBrowserRouter([
             {
                 path: '/tasks',
                 element: (
-                    <ProtectedRoute requireAdmin>
+                    // <ProtectedRoute requireAdmin>
                         <Tasks />
-                    </ProtectedRoute>
+                    // </ProtectedRoute>
                 ),
+            },
+            {
+                path: '/login',
+                element: <Login />,
+            },
+            {
+                path: '/signup',
+                element: <SignUp />,
+            },
+            {
+                path: '*',
+                element: <div className="min-h-screen flex items-center justify-center">Page Not Found</div>
             },
         ],
     },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '/signup',
-        element: <SignUp />,
-    },
-    {
-        path: '*',
-        element: <div className="min-h-screen flex items-center justify-center">Page Not Found</div>
-    },
+
 ]);

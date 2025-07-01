@@ -142,6 +142,7 @@ export const signOut = createAsyncThunk(
             await firebaseSignOut(auth);
             return null;
         } catch (error: any) {
+            console.log(error)
             return rejectWithValue('Failed to sign out');
         }
     }
