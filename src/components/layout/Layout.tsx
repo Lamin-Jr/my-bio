@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Navbar } from './Navbar';
-// import { Footer } from './Footer';
 import { Helmet } from 'react-helmet-async';
 
 interface LayoutProps {
@@ -53,8 +52,6 @@ export const Layout: React.FC<LayoutProps> = ({
         >
           {children}
         </motion.main>
-        {/*<Footer />*/}
-
       </div>
     </>
   );

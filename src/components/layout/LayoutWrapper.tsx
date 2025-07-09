@@ -4,7 +4,7 @@ import {Footer} from "@components/layout/Footer.tsx";
 
 export const LayoutWrapper = () => (
     <Layout>
-        <Outlet />
-        <Footer />
+        <Outlet/>
+        <Footer/>
     </Layout>
 );
