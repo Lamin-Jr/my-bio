@@ -7,10 +7,11 @@ import {FormIndex} from "@components/forms/FormIndex.tsx";
 import {ProfileHeader} from "@components/forms/profile/ProfileHeader.tsx";
 import {ProfileSection} from "@components/forms/profile/ProfileSection.tsx";
 import {updateUserProfile} from "@store/userProfile/profileSlice.ts";
-import {CustomTextarea} from "@form/custom/CustomTextArea.tsx";
+import {CustomTextarea} from "@utils/form/custom/CustomTextArea.tsx";
+import {UserProfileType} from "@components/interfaces/profileType.ts";
 
 interface ProfileValues {
-    bio: string;
+    bio: string
     // Add other form fields here
 }
 
@@ -25,15 +26,16 @@ export const ProfileForm = () => {
 
     const handleSubmit = async (values: ProfileValues) => {
         if (!currentUser) return;
-        await updateUserProfile({
+        updateUserProfile({
             userId: currentUser.uid,
-            profile: values
+            profile: values as UserProfileType
         });
         setEditMode(false);
     };
 
     return (
-        <FormIndex<ProfileValues>
+        // <FormIndex<ProfileValues>
+        <FormIndex <ProfileValues>
             initialValues={{ bio: profile?.bio || '' }}
             onSubmit={handleSubmit}
             validationSchema={profileSchema}

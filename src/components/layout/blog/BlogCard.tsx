@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Calendar, Tag } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
-import { BlogPost } from '@/types';
-import { Card } from '@/components/ui/Card';
+import { BlogPost } from 'src/components/interfaces';
+import { Card } from '@components/ui/Card.tsx';
 
 interface BlogCardProps {
   post: BlogPost;

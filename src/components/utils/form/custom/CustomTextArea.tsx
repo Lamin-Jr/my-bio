@@ -1,5 +1,5 @@
 import { useField } from 'formik';
-import {Textarea, TextareaProps} from "@form/TextArea.tsx";
+import {Textarea, TextareaProps} from "@components/utils/form/TextArea.tsx";
 
 interface FormikTextareaProps extends TextareaProps {
     name: string;

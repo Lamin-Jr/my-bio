@@ -9,12 +9,10 @@ import {
   query, 
   where, 
   orderBy, 
-  serverTimestamp,
-  Timestamp,
-  DocumentReference
+  serverTimestamp
 } from 'firebase/firestore';
-import { db } from './firebase';
-import { Task, TaskFormData } from '../types';
+import { db } from './firebase.ts';
+import { Task, TaskFormData } from '../interfaces';
 
 const COLLECTION = 'tasks';
 

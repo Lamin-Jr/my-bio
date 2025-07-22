@@ -49,7 +49,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'react-vendor': ['react', 'react-dom', 'react-router'],
           'firebase-vendor': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
           'ui-vendor': ['framer-motion', 'lucide-react']
         }
@@ -67,7 +67,7 @@ export default defineConfig({
     include: [
       'react', 
       'react-dom', 
-      'react-router-dom', 
+      'react-router',
       'firebase/app', 
       'firebase/auth', 
       'firebase/firestore'

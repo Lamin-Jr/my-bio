@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .env
 
+# App Seccret Files
+src/config/firebase.config.ts
+

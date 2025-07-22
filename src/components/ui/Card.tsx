@@ -1,5 +1,5 @@
 import  { HTMLAttributes, forwardRef } from 'react';
-import { cn } from '@utils/cn.ts';
+import { cn } from '@components/utils/cn.ts';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   shadow?: 'none' | 'sm' | 'md' | 'lg';

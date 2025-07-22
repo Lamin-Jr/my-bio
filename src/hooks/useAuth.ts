@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/appHooks';
 import { signIn, signOut, signUp, checkAuthState } from '@/store/auth/authSlice';
 import { useEffect } from 'react';
-import {SignInCredentials, SignUpCredentials} from "@/types/authType.ts";
+import {SignInCredentials, SignUpCredentials} from "@components/interfaces/authType.ts";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch();

@@ -7,7 +7,7 @@ import {LoadingSpinner} from "@components/ui/LoadingSpinner.tsx";
 import {FormIndex} from "@components/forms/FormIndex.tsx";
 import {ProfileHeader} from "@components/forms/profile/ProfileHeader.tsx";
 import {ProfileSection} from "@components/forms/profile/ProfileSection.tsx";
-import {CustomTextarea} from "@form/custom/CustomTextArea.tsx";
+import {CustomTextarea} from "@utils/form/custom/CustomTextArea.tsx";
 
 interface ProfileValues {
     bio: string;

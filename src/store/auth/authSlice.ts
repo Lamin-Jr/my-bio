@@ -7,8 +7,8 @@ import {
     User as FirebaseUser
 } from 'firebase/auth';
 import {doc, getDoc, setDoc} from 'firebase/firestore';
-import {auth, db} from '@/services/firebase';
-import {User, AuthState, SignInCredentials, SignUpCredentials} from '@/types/authType.ts';
+import {auth, db} from '@components/services/firebase';
+import {User, AuthState, SignInCredentials, SignUpCredentials} from '@components/interfaces/authType.ts';
 
 const initialState: AuthState = {
     currentUser: null,

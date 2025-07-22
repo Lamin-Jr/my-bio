@@ -1,5 +1,5 @@
 import { useField } from 'formik';
-import {Input, InputProps} from "@utils/form/Input.tsx";
+import {Input, InputProps} from "@components/utils/form/Input.tsx";
 
 
 interface CustomInputProps extends InputProps {
