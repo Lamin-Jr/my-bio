@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Filter, CheckCircle, Circle } from 'lucide-react';
-import { TaskForm } from '../components/task/TaskForm';
-import { TaskList } from '../components/task/TaskList';
+import { TaskForm } from '@components/forms/task/TaskForm';
+import { TaskList } from '@components/forms/task/TaskList';
 import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
-import { getTasks, createTask, updateTask, toggleTaskComplete, deleteTask } from '../services/taskService';
-import { Task, TaskFormData } from '@/types';
+import { getTasks, createTask, updateTask, toggleTaskComplete, deleteTask } from '@components/services/taskService';
+import { Task, TaskFormData } from 'src/components/interfaces';
 import {useAuth} from "@hooks/useAuth.ts";
 
 export const Tasks: React.FC = () => {

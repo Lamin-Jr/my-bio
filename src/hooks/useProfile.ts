@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from "@hooks/appHooks.ts";
-import {UserProfileType} from "@/types/profileType.ts";
+import {UserProfileType} from "@components/interfaces/profileType.ts";
 import {fetchUserProfile, updateUserProfile} from "@store/userProfile/profileSlice.ts";
 
 

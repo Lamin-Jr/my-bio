@@ -9,7 +9,7 @@ interface FormikFormProps<T> {
     className?: string;
 }
 
-export const FormIndex = <T extends {}>({
+export const FormIndex = <T extends {string: string}>({
                                             initialValues,
                                             onSubmit,
                                             validationSchema,

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 import { motion } from 'framer-motion';
 import { Menu, X, Sun, Moon, Computer, User, LogOut } from 'lucide-react';
-// import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '../ui/Button';
 import {useAuth} from "@hooks/useAuth.ts";
 import {useTheme} from "@hooks/useTheme.ts";
+import {ThemeMode} from "@interface/index.ts";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,7 +84,7 @@ export const Navbar: React.FC = () => {
               {themeOptions.map((option) => (
                 <button
                   key={option.value}
-                  onClick={() => setTheme(option.value as any)}
+                  onClick={() => setTheme(option.value as ThemeMode)}
                   className={`p-1.5 rounded-full ${
                     theme === option.value
                       ? 'bg-white dark:bg-gray-700 shadow-sm'
@@ -165,7 +165,7 @@ export const Navbar: React.FC = () => {
                 {themeOptions.map((option) => (
                   <button
                     key={option.value}
-                    onClick={() => setTheme(option.value as any)}
+                    onClick={() => setTheme(option.value as ThemeMode)}
                     className={`p-2 rounded-md flex items-center space-x-2 ${
                       theme === option.value
                         ? 'bg-gray-100 dark:bg-gray-800'

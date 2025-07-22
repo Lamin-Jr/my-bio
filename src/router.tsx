@@ -1,28 +1,52 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter} from "react-router";
 import {Home} from "@/pages/Home.tsx";
 import {Info} from "@/pages/Info.tsx";
 import {Services} from "@/pages/Services.tsx";
-import {Blog} from "@pages/Blog.tsx";
+import {BlogPage} from "@pages/Blog.tsx";
 import {ProtectedRoute} from "@components/auth/ProtectedRoute.tsx";
 import {Tasks} from "@pages/Tasks.tsx";
 import {Login} from "@pages/Login.tsx";
 import {SignUp} from "@pages/SignUp.tsx";
 import {ProfilePage} from "@pages/ProfilePage.tsx";
 import {LayoutWrapper} from "@components/layout/LayoutWrapper.tsx";
+import {BlogPostView} from "@components/layout/blog/BlogPostView.tsx";
+import {BlogPostForm} from "@components/forms/Blog/BlogPostForm.tsx";
 
 export const router = createBrowserRouter([
     {
-        element: <LayoutWrapper />,
+        path: "/",
+        Component: LayoutWrapper,
         children: [
-            { path: '/', element: <Home /> },
-            { path: '/info', element: <Info /> },
-            { path: '/services', element: <Services /> },
-            { path: '/blog', element: <Blog /> },
-            { path: '/profile', element: (
+            { path: '/', Component: Home },
+            { path: '/info', Component: Info },
+            { path: '/services', Component: Services },
+            { path: '/blog',  children: [
+                    {index: true, Component: BlogPage},
+                    {
+                        path: ':id',
+                        Component: BlogPostView,
+                    },
+                    {
+                        path: 'new',
+                        Component: ()=>
+                             <ProtectedRoute>
+                                <BlogPostForm/>
+                            </ProtectedRoute>
+                        ,
+                    },
+                    {
+                        path: 'edit/:id',
+                        Component: ()=>
+                            <ProtectedRoute>
+                                <BlogPostForm />
+                            </ProtectedRoute>
+                        ,
+                }] },
+            { path: '/profile', Component: ()=>
                 <ProtectedRoute>
                     <ProfilePage />
                 </ProtectedRoute>
-                ) },
+                 },
             {
                 path: '/tasks',
                 element: (
@@ -33,15 +57,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login />,
+                Component: Login,
             },
             {
                 path: '/signup',
-                element: <SignUp />,
+                Component: SignUp,
             },
             {
                 path: '*',
-                element: <div className="min-h-screen flex items-center justify-center">Page Not Found</div>
+                Component: ()=> <div className="min-h-screen flex items-center justify-center">Page Not Found</div>
             },
         ],
     },

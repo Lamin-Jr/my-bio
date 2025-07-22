@@ -1,12 +1,12 @@
 import {Button} from '@/components/ui/Button';
 import {Mail, Lock} from 'lucide-react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router';
 import * as Yup from 'yup';
 import {FormIndex} from "@components/forms/FormIndex.tsx";
-import {CustomInput} from "@form/custom/CustomInput.tsx";
 import {useAuth} from "@hooks/useAuth.ts";
-import {AuthForm} from "@components/forms/auth/AuthForm.tsx";
 import {useEffect} from "react";
+import {LoginFormLayout} from "@components/forms/login/LoginFormLayOut.tsx";
+import {CustomInput} from "@utils/form/custom/CustomInput.tsx";
 
 interface LoginValues {
     email: string;
@@ -42,7 +42,7 @@ export const LoginForm = () => {
     }, [isAuthenticated, navigate, from]);
 
     return (
-        <AuthForm
+        <LoginFormLayout
             title={"Log in to your account"}
             submitText={"Login"}
             subtitle={'Enter your credentials to access the admin dashboard'}
@@ -91,6 +91,6 @@ export const LoginForm = () => {
                     </p>
                 </div>
             </FormIndex>
-        </AuthForm>
+        </LoginFormLayout>
     );
 };

@@ -11,10 +11,9 @@ import {
   orderBy, 
   limit,
   serverTimestamp,
-  // Timestamp
 } from 'firebase/firestore';
-import { db } from './firebase';
-import { BlogPost, BlogFormData } from '../types';
+import { db } from './firebase.ts';
+import {BlogPost} from "@interface/blog.ts";
 
 const COLLECTION = 'blogPosts';
 
@@ -30,11 +29,12 @@ const createSlug = (title: string): string => {
 const convertBlogPost = (doc: any): BlogPost => {
   const data = doc.data();
   return {
-    id: doc.id,
+    id: doc ? doc.id : "",
     title: data.title,
     slug: data.slug,
     content: data.content,
     excerpt: data.excerpt,
+    category: data.category,
     published: data.published,
     createdAt: data.createdAt?.toMillis() || Date.now(),
     updatedAt: data.updatedAt?.toMillis() || Date.now(),
@@ -135,10 +135,10 @@ export const getPost = async (postId: string): Promise<BlogPost | null> => {
 };
 
 // Create a new blog post
-export const createPost = async (data: BlogFormData, authorId: string): Promise<BlogPost> => {
+export const createPost = async (data: BlogPost, authorId: string): Promise<BlogPost> => {
   try {
     const slug = createSlug(data.title);
-    
+
     const postData = {
       ...data,
       slug,
@@ -146,16 +146,16 @@ export const createPost = async (data: BlogFormData, authorId: string): Promise<
       updatedAt: serverTimestamp(),
       author: authorId
     };
-    
+
     const docRef = await addDoc(collection(db, COLLECTION), postData);
-    
+
     // For immediate UI update
     return {
-      id: docRef.id,
       ...data,
+      id: docRef.id,
       slug,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: Date.now().toString(),
+      updatedAt: Date.now().toString(),
       author: authorId,
       tags: data.tags || []
     };
@@ -166,7 +166,7 @@ export const createPost = async (data: BlogFormData, authorId: string): Promise<
 };
 
 // Update an existing blog post
-export const updatePost = async (postId: string, data: Partial<BlogFormData>): Promise<void> => {
+export const updatePost = async (postId: string, data: Partial<BlogPost>): Promise<void> => {
   try {
     const postRef = doc(db, COLLECTION, postId);
     
