@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Lightbulb, PenTool, Smartphone, ExternalLink } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
-import { BlogCard } from '../components/blog/BlogCard';
-import { getRecentPosts } from '../services/blogService';
-import { BlogPost } from '@/types';
+import { BlogCard } from '@components/layout/blog/BlogCard';
+
 import {useAuth} from "@hooks/useAuth.ts";
+import {useAppDispatch, useAppSelector} from "@hooks/appHooks.ts";
+import {clearCurrentPost, fetchBlogPosts, selectBlog} from "@store/blog/blogSlice.ts";
 
 export const Home: React.FC = () => {
-  const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
+  const { posts, loading } = useAppSelector(selectBlog);
   const { currentUser } = useAuth();
 
-  useEffect(() => {
-    const fetchRecentPosts = async () => {
-      try {
-        const posts = await getRecentPosts(3);
-        setRecentPosts(posts);
-      } catch (error) {
-        console.error('Error fetching recent posts:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchRecentPosts();
+  useEffect(() => {
+    dispatch(fetchBlogPosts());
+    dispatch(clearCurrentPost());
   }, []);
 
   // Animation variants
@@ -206,7 +198,7 @@ export const Home: React.FC = () => {
             </div>
           ) : (
             <>
-              {recentPosts.length > 0 ? (
+              {posts.length > 0 ? (
                 <motion.div 
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                   variants={staggerContainer}
@@ -214,7 +206,7 @@ export const Home: React.FC = () => {
                   whileInView="visible"
                   viewport={{ once: true }}
                 >
-                  {recentPosts.map((post, index) => (
+                  {posts.map((post, index) => (
                     <BlogCard key={post.id} post={post} index={index} />
                   ))}
                 </motion.div>
@@ -231,7 +223,7 @@ export const Home: React.FC = () => {
                 </div>
               )}
               
-              {recentPosts.length > 0 && (
+              {posts.length > 0 && (
                 <motion.div 
                   className="text-center mt-12"
                   variants={fadeInUp}

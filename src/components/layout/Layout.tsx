@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Navbar } from './Navbar';
 import { Helmet } from 'react-helmet-async';
+import {Footer} from "@components/layout/Footer.tsx";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -42,7 +43,6 @@ export const Layout: React.FC<LayoutProps> = ({
       
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        
         <motion.main 
           className="flex-grow pt-16"
           initial="initial"
@@ -52,6 +52,7 @@ export const Layout: React.FC<LayoutProps> = ({
         >
           {children}
         </motion.main>
+        <Footer/>
       </div>
     </>
   );

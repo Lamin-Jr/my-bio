@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '../components/ui/Card';
 import { Calendar, Github as GitHub, Mail, MapPin, Briefcase, Award, BookOpen, Code } from 'lucide-react';
 import {RootState} from "src/store";
-import {useAppSelector} from "@hooks/appHooks.ts";
+import {useAppDispatch, useAppSelector} from "@hooks/appHooks.ts";
+import {createDocCollection} from "@store/app/appSlice.ts";
 
 
 
 export const Info: React.FC = () => {
   const userProfile = useAppSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
 
   const skills = [
     { category: 'Frontend', items: ['React', 'Vue.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML/CSS'] },
@@ -20,22 +22,28 @@ export const Info: React.FC = () => {
   // Experience items
   const experiences = [
     {
-      company: 'Tech Solutions Inc.',
-      position: 'Senior Frontend Developer',
-      period: 'Jan 2021 - Present',
+      company: 'Adesso Italia.',
+      position: 'Software Developer',
+      period: 'Jan 2022 - 2025',
       description: 'Lead frontend development for enterprise applications. Implemented modern React architecture with TypeScript. Improved performance by 40% through code optimization.',
     },
     {
-      company: 'WebCreative Agency',
-      position: 'Full Stack Developer',
-      period: 'Mar 2018 - Dec 2020',
-      description: 'Developed custom web applications for clients across various industries. Worked with React, Node.js, and MongoDB. Led a team of 3 junior developers.',
+      company: 'ZeroUno SRL',
+      position: 'Frontend Engineer',
+      period: 'Mar 2021 - Dec 2022',
+      description: 'Developed custom web applications for clients across various industries. Worked with Angular, React, Node.js, and MongoDB. Led a team of 3 junior developers.',
+    },
+    {
+      company: 'WimoTelecom',
+      position: 'Frontend Developer',
+      period: 'Jul 2020 - Feb 2021',
+      description: 'Built responsive interfaces for early-stage startups. Implemented UI designs using HTML, CSS, and JavaScript. Worked in an agile environment with weekly sprints.',
     },
     {
       company: 'StartupLaunch',
       position: 'Frontend Developer',
-      period: 'Jul 2016 - Feb 2018',
-      description: 'Built responsive interfaces for early-stage startups. Implemented UI designs using HTML, CSS, and JavaScript. Worked in an agile environment with weekly sprints.',
+      period: 'Jul 2018 - Feb 2020',
+      description: 'Developed and maintained websites on various CMS and CRM platforms, enhanced website functionalities to improve user engagement.',
     },
   ];
   
@@ -71,9 +79,15 @@ export const Info: React.FC = () => {
     show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  useEffect(() => {
-    console.log(userProfile, "User Profile");
-  }, []);
+  const handleCollectionSummit = async () => {
+    const collectionToPost = {experiences: [...experiences], education : [...education], skills: [...skills] }
+    if(userProfile.currentUser?.uid)  {
+      await dispatch(createDocCollection({data: collectionToPost, path: "/appContent/pages/about"}))
+    }else {
+      console.log("Error in posting collection");
+    }
+    console.log({experiences});
+  }
   return (
     <>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
@@ -159,6 +173,7 @@ export const Info: React.FC = () => {
                           In my free time, I enjoy basketball and personal development projects.
                         </p>
                       </div>
+                      <button onClick={handleCollectionSummit}>Post Collection</button>
                     </div>
                   </div>
                 </Card>

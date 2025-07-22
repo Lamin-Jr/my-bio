@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/appHooks';
 import { selectTheme, setTheme, toggleTheme } from '@/store/theme/themeSlice';
-import {ThemeMode} from "@/types";
+import {ThemeMode} from "src/components/interfaces";
 
 export const useTheme = () => {
     const dispatch = useAppDispatch();

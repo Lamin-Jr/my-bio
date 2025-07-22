@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { Button } from '../ui/Button';
-import { TaskFormData } from '../../types';
+import { Button } from '../../ui/Button.tsx';
+import { TaskFormData } from '@components/interfaces/index.ts';
 
 interface TaskFormProps {
   onSubmit: (data: TaskFormData) => Promise<void>;
@@ -22,7 +22,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     
-    // Clear error for this field when user types
+    // Clear error for this field when user interfaces
     if (errors[name]) {
       setErrors((prev) => {
         const newErrors = { ...prev };

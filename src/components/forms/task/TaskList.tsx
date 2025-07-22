@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Edit, Trash2, ChevronRight, ChevronDown } from 'lucide-react';
 import { format } from 'date-fns';
-import { Task } from '../../types';
-import { Button } from '../ui/Button';
-import { Card } from '../ui/Card';
+import { Task } from 'src/components/interfaces';
+import { Button } from '../../ui/Button.tsx';
+import { Card } from '../../ui/Card.tsx';
 
 interface TaskListProps {
   tasks: Task[];

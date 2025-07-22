@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { db } from '@/services/firebase';
+import { db } from '@components/services/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import {UserProfileType,  ProfileStateType} from "@/types/profileType.ts";
+import {UserProfileType,  ProfileStateType} from "@components/interfaces/profileType.ts";
 import {RootState} from "@/store";
-
-
 
 const initialState: ProfileStateType = {
     profile: null,

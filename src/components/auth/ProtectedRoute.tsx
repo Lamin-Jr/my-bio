@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/appHooks.ts';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { initializeAuth } from '@/store/auth/authSlice';
 

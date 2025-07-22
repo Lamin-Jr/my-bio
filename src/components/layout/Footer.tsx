@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
